@@ -4,14 +4,17 @@ import Keys._
 object InfluxBuild extends Build {
 
   val org = "org.influxdb"
+//  val publishToRepo: Some[URLRepository] = Some(Resolver.url("Indix artifactory Local", new URL("http://artifacts.indix.tv:8081/artifactory/libs-release-local")))
 
   // the core API is compatible with scala 2.10+ and only depends on slf4j
   lazy val core = Project("core", file("core")) settings(
       name := "influxdb-scala-core",
       organization := org,
-      version := "0.6-SNAPSHOT",
+      version := "0.6-indix-SNAPSHOT",
       scalaVersion := "2.10.3",
       crossScalaVersions := Seq("2.10.3","2.11.0-M7"),
+      publishTo := Some("Indix Snapshot Artifactory" at "http://artifacts.indix.tv:8081/artifactory/libs-snapshot-local"),
+      credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
       libraryDependencies ++= Seq(
         "org.slf4j" % "slf4j-api" % "1.7.7"
 
@@ -25,7 +28,7 @@ object InfluxBuild extends Build {
   lazy val standalone = Project("standalone", file("standalone")) dependsOn(core) settings(
       name := "influxdb-scala-standalone",
       organization := org,
-      version := "0.6-SNAPSHOT",
+      version := "0.6-indix-SNAPSHOT",
       scalaVersion := "2.10.3",
       crossScalaVersions := Seq("2.10.3","2.11.0-M7"),
       mainClass := Some("TestApp"),
