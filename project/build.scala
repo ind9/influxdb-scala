@@ -10,10 +10,10 @@ object InfluxBuild extends Build {
   lazy val core = Project("core", file("core")) settings(
       name := "influxdb-scala-core",
       organization := org,
-      version := "0.6-indix-SNAPSHOT",
+      version := "0.6-indix",
       scalaVersion := "2.10.3",
       crossScalaVersions := Seq("2.10.3","2.11.0-M7"),
-      publishTo := Some("Indix Snapshot Artifactory" at "http://artifacts.indix.tv:8081/artifactory/libs-snapshot-local"),
+      publishTo := Some("Indix Releases Artifactory" at "http://artifacts.indix.tv:8081/artifactory/libs-release-local"),
       credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
       libraryDependencies ++= Seq(
         "org.slf4j" % "slf4j-api" % "1.7.7"
@@ -28,9 +28,10 @@ object InfluxBuild extends Build {
   lazy val standalone = Project("standalone", file("standalone")) dependsOn(core) settings(
       name := "influxdb-scala-standalone",
       organization := org,
-      version := "0.6-indix-SNAPSHOT",
+      version := "0.6-indix",
       scalaVersion := "2.10.3",
       crossScalaVersions := Seq("2.10.3","2.11.0-M7"),
+      publishTo := Some("Indix Releases Artifactory" at "http://artifacts.indix.tv:8081/artifactory/libs-release-local"),
       mainClass := Some("TestApp"),
       libraryDependencies ++= Seq(
     		  "org.json4s" % "json4s-native_2.10" % "3.2.6",
